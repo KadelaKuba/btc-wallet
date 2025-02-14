@@ -1,0 +1,10 @@
+# it is important to not COPY whole folder .git including - it will be huge later
+/.git
+/.idea
+
+# avoid COPYing any files potentially containing secrets
+/*.local
+/*.cache
+/docker-compose.yml
+
+/app/node_modules

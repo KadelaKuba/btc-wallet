@@ -1,0 +1,13 @@
+services:
+  node:
+    build:
+      context: .
+      dockerfile: docker/node/Dockerfile
+    container_name: btc-portfolio-node
+    ports:
+      - 8008:8008
+    volumes:
+      - type: bind
+        source: ./app
+        target: /srv/app
+    tty: true
