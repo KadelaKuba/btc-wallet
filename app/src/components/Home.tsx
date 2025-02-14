@@ -4,7 +4,7 @@ import {satoshisToBitcoin} from "bitcoin-conversion";
 export function Home() {
     const [price, setPrice] = useState(0);
 
-    fetch('https://www.blockonomics.co/api/searchhistory', {
+    fetch('https://proxy.corsfix.com/?https://www.blockonomics.co/api/searchhistory', {
         headers: {
             Authorization: 'Bearer ' + import.meta.env.VITE_BLOCKONOMICS_API_KEY,
             'Content-Type': 'application/json',
