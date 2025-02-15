@@ -8,12 +8,19 @@ export default createTheme({
         ].join(','),
     },
     colorSchemes: {
-        light: true,
-        dark: true,
+        light: {
+            palette: {
+                primary: {
+                    main: '#F7931A',
+                }
+            }
+        },
+        dark: {
+            palette: {
+                primary: {
+                    main: '#F7931A',
+                }
+            }
+        },
     },
-    palette: {
-        primary: {
-            main: '#003892',
-        }
-    }
 });
