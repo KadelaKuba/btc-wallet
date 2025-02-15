@@ -1,5 +1,5 @@
 import {useAuth0} from "@auth0/auth0-react";
-import {BtcWallet} from "@app/components/BtcWallet";
+import {BtcBalance} from "@app/components/BtcBalance";
 import {Box, Button, Paper, Typography} from "@mui/material";
 
 export function Account() {
@@ -20,11 +20,11 @@ export function Account() {
                 <Box p={4}>
                     <Box display="flex" justifyContent="space-between">
                         <Typography variant="h4">{user?.nickname}</Typography>
-                        <Button variant="text" onClick={handleLogout}>
+                        <Button variant="outlined" onClick={handleLogout}>
                             Odhlásit
                         </Button>
                     </Box>
-                    <BtcWallet/>
+                    <BtcBalance/>
                 </Box>
             </Paper>
         )

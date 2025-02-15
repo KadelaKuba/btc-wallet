@@ -1,8 +1,9 @@
 import {useState} from "react";
 import {useAuth0} from "@auth0/auth0-react";
 import {satoshisToBitcoin} from "bitcoin-conversion";
+import {Box, Typography} from "@mui/material";
 
-export function BtcWallet() {
+export function BtcBalance() {
     const [price, setPrice] = useState(0);
     const { user, isAuthenticated, isLoading } = useAuth0();
 
@@ -26,11 +27,11 @@ export function BtcWallet() {
             setPrice(btcPrice);
         })
 
-    console.log(isAuthenticated);
-    console.log(user);
     return (
-        <>
-            <p>Aktuální stav: {price} BTC</p>
-        </>
+        <Box pt={3}>
+            <Typography>
+                Aktuální stav: {price} <strong>BTC</strong>
+            </Typography>
+        </Box>
     );
 }
