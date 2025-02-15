@@ -5,6 +5,9 @@ import {BrowserRouter} from "react-router-dom";
 import {Auth0ProviderWithNavigate} from "@app/Auth0ProviderWithNavigate";
 import {Container, CssBaseline, ThemeProvider} from "@mui/material";
 import theme from "@app/theme";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -13,7 +16,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 <ThemeProvider theme={theme}>
                     <CssBaseline/>
                     <Container maxWidth="sm">
-                        <App/>
+                        <QueryClientProvider client={queryClient}>
+                            <App/>
+                        </QueryClientProvider>
                     </Container>
                 </ThemeProvider>
             </Auth0ProviderWithNavigate>

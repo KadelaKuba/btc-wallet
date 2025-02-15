@@ -1,35 +1,27 @@
-import {useState} from "react";
 import {satoshisToBitcoin} from "bitcoin-conversion";
 import {Box, Skeleton, Typography} from "@mui/material";
+import {useBitcoinHistory} from "@app/hooks/useBitcoinHistory";
 
 export function BtcBalance() {
-    const [price, setPrice] = useState<undefined|number>(undefined);
+    const {getHistoryQuery, getPriceInCzkQuery} = useBitcoinHistory();
 
-    fetch('https://proxy.corsfix.com/?https://www.blockonomics.co/api/searchhistory', {
-        headers: {
-            Authorization: 'Bearer ' + import.meta.env.VITE_BLOCKONOMICS_API_KEY,
-            'Content-Type': 'application/json',
-        },
-        method: "POST",
-        body: JSON.stringify({"addr": import.meta.env.VITE_BTC_PUBLIC_KEY})
-    })
-        .then(resp => resp.json())
-        .then(function (response) {
-            const numberOfSatoshi = response.history.reduce((accumulator, currentValue) => accumulator + currentValue.value, 0)
-            const btcPrice = satoshisToBitcoin(numberOfSatoshi);
+    if (getHistoryQuery.isPending || getPriceInCzkQuery.isPending) {
+        return (
+            <Box pt={3}>
+                <Skeleton variant="text" sx={{fontSize: '1rem'}}/>
+            </Box>
+        );
+    }
 
-            setPrice(btcPrice);
-        });
+    const totalAmountOfSatoshi = getHistoryQuery.data.history.reduce((accumulator, currentValue) => accumulator + currentValue.value, 0)
+    const totalAmountOfBtc = satoshisToBitcoin(totalAmountOfSatoshi);
+    const actualPriceInCzk = getPriceInCzkQuery.data.price * totalAmountOfBtc;
 
     return (
         <Box pt={3}>
-            {price === undefined ? (
-                <Skeleton variant="text" sx={{fontSize: '1rem'}}/>
-            ) : (
-                <Typography>
-                    Aktuální stav: {price} <strong>BTC</strong>
-                </Typography>
-            )}
+            <Typography>
+                Aktuální stav: {totalAmountOfBtc.toFixed(5)} <strong>BTC</strong> = {actualPriceInCzk.toFixed(0)} <strong>CZK</strong>
+            </Typography>
         </Box>
     );
 }
