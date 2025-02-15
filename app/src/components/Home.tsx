@@ -1,10 +1,31 @@
-import {Login} from "@app/components/Login";
+import {Box, Button, Paper, Typography} from "@mui/material";
+import {useAuth0} from "@auth0/auth0-react";
 
 export function Home() {
+    const { loginWithRedirect } = useAuth0();
+
+    const handleLogin = async () => {
+        await loginWithRedirect({
+            appState: {
+                returnTo: "/profile",
+            },
+        });
+    };
+
     return (
-        <>
-            <p>Pro zobrazení stavu vaší BTC peněženky se prosím přihlaste</p>
-            <Login/>
-        </>
+        <Paper>
+            <Box p={4} justifyContent="center" alignItems="center">
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <Typography variant="h4">Bitcoin peněženka</Typography>
+                    <Box>
+                        <img src="/assets/bitcoinWallet.png" width={70} alt="BTC peněženka"/>
+                    </Box>
+                </Box>
+                <Typography gutterBottom>Pro zobrazení stavu vašich BTC se prosím přihlaste!</Typography>
+                <Box pt={2}>
+                    <Button variant="contained" onClick={handleLogin}>Přihlásit</Button>
+                </Box>
+            </Box>
+        </Paper>
     );
 }
