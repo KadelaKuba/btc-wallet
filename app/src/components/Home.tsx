@@ -1,26 +1,11 @@
-import {useState} from "react";
-import {satoshisToBitcoin} from "bitcoin-conversion";
+import {NavLink} from "react-router-dom";
 
 export function Home() {
-    const [price, setPrice] = useState(0);
-
-    fetch('https://proxy.corsfix.com/?https://www.blockonomics.co/api/searchhistory', {
-        headers: {
-            Authorization: 'Bearer ' + import.meta.env.VITE_BLOCKONOMICS_API_KEY,
-            'Content-Type': 'application/json',
-        },
-        method: "POST",
-        body: JSON.stringify({"addr": import.meta.env.VITE_BTC_PUBLIC_KEY})
-    })
-        .then(resp => resp.json())
-        .then(function (response) {
-            const numberOfSatoshi = response.history.reduce((accumulator, currentValue) => accumulator + currentValue.value, 0)
-            const btcPrice = satoshisToBitcoin(numberOfSatoshi);
-
-            setPrice(btcPrice);
-        })
-
     return (
-        <>{price}</>
+        <>
+            <NavLink to="/login" end>
+                Please login!
+            </NavLink>
+        </>
     );
 }
