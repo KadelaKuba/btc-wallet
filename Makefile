@@ -18,3 +18,6 @@ npm-container:
 
 npm-run-dev:
 	docker-compose exec node npm run dev
+
+npm-build-production:
+	docker-compose exec node npm run build
