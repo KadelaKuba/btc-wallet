@@ -30,7 +30,7 @@ export function BtcWallet() {
     console.log(user);
     return (
         <>
-            {price}
+            <p>Aktuální stav: {price} BTC</p>
         </>
     );
 }

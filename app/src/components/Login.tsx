@@ -11,5 +11,5 @@ export function Login() {
         });
     };
 
-    return <button onClick={handleLogin}>Log In</button>;
+    return <button onClick={handleLogin}>Přihlásit</button>;
 }

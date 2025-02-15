@@ -7,7 +7,7 @@ export function Profile() {
 
     console.log(isAuthenticated);
     if (isLoading) {
-        return <div>Loading ...</div>;
+        return <div>Načítání ...</div>;
     }
 
     return (
@@ -15,7 +15,6 @@ export function Profile() {
             <>
                 <div>
                     <h2>{user.name}</h2>
-                    <p>{user.email}</p>
                 </div>
                 <p>
                     <BtcWallet/>

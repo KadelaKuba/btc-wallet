@@ -1,11 +1,10 @@
-import {NavLink} from "react-router-dom";
+import {Login} from "@app/components/Login";
 
 export function Home() {
     return (
         <>
-            <NavLink to="/login" end>
-                Please login!
-            </NavLink>
+            <p>Pro zobrazení stavu vaší BTC peněženky se prosím přihlaste</p>
+            <Login/>
         </>
     );
 }
