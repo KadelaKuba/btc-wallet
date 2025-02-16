@@ -1,9 +1,12 @@
 import {satoshisToBitcoin} from "bitcoin-conversion";
-import {Box, Card, Skeleton, Typography} from "@mui/material";
+import {Box, Card, List, ListItem, ListItemButton, Skeleton, Typography} from "@mui/material";
 import {useBitcoinHistory} from "@app/hooks/useBitcoinHistory";
 import {CurrencyBitcoin} from "@mui/icons-material";
+import {useNavigate} from "react-router-dom";
 
 export function BtcBalance() {
+    const navigate = useNavigate();
+
     const czkNumberFormat = new Intl.NumberFormat('cs', {
         style: 'currency',
         currency: 'CZK',
@@ -23,20 +26,30 @@ export function BtcBalance() {
     const totalAmountOfBtc = satoshisToBitcoin(totalAmountOfSatoshi);
     const actualPriceInCzk = getPriceInCzkQuery.data.price * totalAmountOfBtc;
 
+    const handleItemClick = async () => {
+        await navigate("/transaction-details");
+    };
+
     return (
         <Box pt={3}>
-            <Card variant="outlined">
-                <Box p={2} display="flex" alignItems="center" justifyContent="space-between">
-                    <Box display="flex" alignItems="center">
-                        <CurrencyBitcoin color="primary"/>
-                        <Typography>Bitcoin</Typography>
-                    </Box>
-                    <Box display="flex" flexDirection="column" textAlign="right">
-                        <Typography fontWeight="bolder">{czkNumberFormat.format(actualPriceInCzk.toFixed(0))}</Typography>
-                        <Typography variant="body2">{totalAmountOfBtc.toFixed(5)} BTC</Typography>
-                    </Box>
-                </Box>
-            </Card>
+            <List>
+                <ListItem disableGutters disablePadding>
+                    <ListItemButton sx={{ p: 0, width: '100%' }}>
+                        <Card variant="outlined" onClick={handleItemClick} sx={{width: '100%'}}>
+                            <Box p={2} display="flex" alignItems="center" justifyContent="space-between">
+                                <Box display="flex" alignItems="center">
+                                    <CurrencyBitcoin color="primary"/>
+                                    <Typography>Bitcoin</Typography>
+                                </Box>
+                                <Box display="flex" flexDirection="column" textAlign="right">
+                                    <Typography fontWeight="bolder">{czkNumberFormat.format(actualPriceInCzk.toFixed(0))}</Typography>
+                                    <Typography variant="body2">{totalAmountOfBtc.toFixed(5)} BTC</Typography>
+                                </Box>
+                            </Box>
+                        </Card>
+                    </ListItemButton>
+                </ListItem>
+            </List>
         </Box>
     );
 }
