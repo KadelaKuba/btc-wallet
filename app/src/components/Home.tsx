@@ -1,5 +1,6 @@
 import {Box, Button, Paper, Typography} from "@mui/material";
 import {useAuth0} from "@auth0/auth0-react";
+import {AppPaper} from "@app/components/AppPaper";
 
 export function Home() {
     const { loginWithRedirect } = useAuth0();
@@ -13,8 +14,8 @@ export function Home() {
     };
 
     return (
-        <Paper>
-            <Box p={4} justifyContent="center" alignItems="center">
+        <AppPaper>
+            <Box justifyContent="center" alignItems="center">
                 <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
                     <Typography variant="h4">Bitcoin peněženka</Typography>
                     <Box>
@@ -26,6 +27,6 @@ export function Home() {
                     <Button variant="contained" onClick={handleLogin}>Přihlásit</Button>
                 </Box>
             </Box>
-        </Paper>
+        </AppPaper>
     );
 }
