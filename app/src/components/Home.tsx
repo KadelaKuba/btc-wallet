@@ -7,7 +7,7 @@ export function Home() {
     const handleLogin = async () => {
         await loginWithRedirect({
             appState: {
-                returnTo: "/profile",
+                returnTo: "/account",
             },
         });
     };
