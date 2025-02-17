@@ -1,6 +1,6 @@
 import {Box, Button, Divider, List, Skeleton, Typography} from "@mui/material";
 import {useBitcoinHistory} from "@app/hooks/useBitcoinHistory";
-import {TransactionListItem} from "@app/components/TransactionListItem";
+import {TransactionListItem} from "@app/components/transactions/TransactionListItem";
 import {KeyboardReturn} from "@mui/icons-material";
 import {AppPaper} from "@app/components/AppPaper";
 import {useNavigate} from "react-router-dom";
