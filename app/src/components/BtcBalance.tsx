@@ -27,15 +27,15 @@ export function BtcBalance() {
     const actualPriceInCzk = getPriceInCzkQuery.data.price * totalAmountOfBtc;
 
     const handleItemClick = async () => {
-        await navigate("/transaction-details");
+        await navigate("/transactions");
     };
 
     return (
         <Box pt={3}>
             <List>
                 <ListItem disableGutters disablePadding>
-                    <ListItemButton sx={{ p: 0, width: '100%' }}>
-                        <Card variant="outlined" onClick={handleItemClick} sx={{width: '100%'}}>
+                    <ListItemButton sx={{ p: 0, width: '100%' }} onClick={handleItemClick}>
+                        <Card variant="outlined" sx={{width: '100%'}}>
                             <Box p={2} display="flex" alignItems="center" justifyContent="space-between">
                                 <Box display="flex" alignItems="center">
                                     <CurrencyBitcoin color="primary"/>

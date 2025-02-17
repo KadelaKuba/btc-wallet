@@ -5,7 +5,7 @@ import {KeyboardReturn} from "@mui/icons-material";
 import {AppPaper} from "@app/components/AppPaper";
 import {useNavigate} from "react-router-dom";
 
-export function TransactionDetails() {
+export function TransactionList() {
     const navigate = useNavigate();
     const {getHistoryQuery, getPriceInCzkQuery} = useBitcoinHistory();
 
