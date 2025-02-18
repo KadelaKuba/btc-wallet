@@ -1,6 +1,6 @@
 import {AppPaper} from "@app/components/AppPaper";
-import {Box, Button, Chip, Divider, Skeleton, Typography} from "@mui/material";
-import {KeyboardReturn} from "@mui/icons-material";
+import {Box, Chip, Divider, IconButton, Skeleton, Typography} from "@mui/material";
+import {ArrowBackIosNew} from "@mui/icons-material";
 import {useNavigate, useParams} from "react-router-dom";
 import {useGetTransactionDetail} from "@app/hooks/useGetTransactionDetail";
 import {satoshisToBitcoin} from "bitcoin-conversion";
@@ -31,15 +31,21 @@ export function TransactionDetail() {
 
     return (
         <AppPaper>
-            <Box display="flex" alignItems="center" mb={2}>
-                <Button sx={{mr: 2}} size="small" variant="outlined" startIcon={<KeyboardReturn/>} onClick={handleReturn}>
-                    Zpět
-                </Button>
-                <Typography variant="h5">Detail transakce</Typography>
+            <Box mb={2}>
+                <Box display="flex" justifyContent="center" alignItems="center">
+                    <Box display="flex" justifyContent="center" alignItems="center">
+                        <IconButton>
+                            <ArrowBackIosNew onClick={handleReturn} fontSize="small"/>
+                        </IconButton>
+                    </Box>
+                    <Box display="flex" justifyContent="center" alignItems="center" flexGrow={1}>
+                        <Typography>Received transaction</Typography>
+                    </Box>
+                </Box>
             </Box>
             <Divider/>
-            <Box>
-                <Chip color="success" label={getTransactionDetail.data.status} />
+            <Box pt={1} textAlign="center">
+                <Chip size="small" color="success" label={getTransactionDetail.data.status} />
                 <Typography>{'Time: ' + date.toLocaleString("cs")}</Typography>
                 <Typography>{'Fee: ' + satoshisToBitcoin(getTransactionDetail.data.fee).toFixed(5)} BTC</Typography>
                 <Typography>{'Status: ' + getTransactionDetail.data.status}</Typography>
