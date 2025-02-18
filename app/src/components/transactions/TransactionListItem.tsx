@@ -8,6 +8,10 @@ export function TransactionListItem({transaction}) {
 
     const totalAmountOfBtc = satoshisToBitcoin(transaction.value);
     const date = new Date(transaction.time * 1000);
+    const formatter = new Intl.DateTimeFormat(
+        'cs',
+        { dateStyle: 'medium', timeStyle: 'short' } as Intl.DateTimeFormatOptions
+    );
 
     const handleItemClick = async () => {
         await navigate("/transaction/" + transaction.txid);
@@ -26,7 +30,7 @@ export function TransactionListItem({transaction}) {
                                         Přijato
                                     </Typography>
                                     <Typography variant="body2">
-                                        {date.toLocaleString("cs")}
+                                        {formatter.format(date)}
                                     </Typography>
                                 </Box>
                             </Box>
